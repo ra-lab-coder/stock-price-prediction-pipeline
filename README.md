@@ -14,7 +14,7 @@ This project implements a full-stack financial analysis pipeline, integrating au
 - **Business Intelligence:** Interactive Tableau dashboard for visualizing trends and model performance.
 
 ## 📊 Visualization (Tableau)
-![Dashboard Preview](stock_dashborad_preview.jpeg)
+![Dashboard Preview](./assets/stock_dashborad_preview.jpeg)
 
 ## 🛠️ How to Run
 1. Install dependencies:
