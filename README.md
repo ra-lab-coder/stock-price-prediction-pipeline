@@ -4,12 +4,15 @@
 ![Scikit-Learn](https://img.shields.io/badge/scikit_learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![Tableau](https://img.shields.io/badge/Tableau-Visualization-orange)
 
+
 ## 📖 Project Context
 This project was developed as part of a structured finance & data research programme, designed to simulate real-world data science workflows in financial analytics.
 It covers **data ingestion, preprocessing, feature engineering, model development, evaluation, and business-facing visualization.**
 
+
 ## 🎯 Problem Statement
 Predict short-horizon stock price movements using historical market data while ensuring realistic evaluation practices (e.g. avoiding look-ahead bias), and communicate results through an interactive dashboard.
+
 
 ## 🧱 Pipeline Overview
 * **Data Collection:** Automated ETL pipeline using Yahoo Finance API
@@ -18,6 +21,19 @@ Predict short-horizon stock price movements using historical market data while e
 * **Modeling:** Supervised ML models implemented in scikit-learn
 * **Evaluation:** Time-based train/test split to prevent data leakage
 * **Visualization:** Tableau dashboard for price trends and prediction errors
+
+
+## 📊 Data Scope
+
+* Frequency: Daily
+* Time span: Approximately 1–2 years per asset
+* Assets: Single stock per experiment
+* Sample size: Hundreds of observations
+
+Given the limited data size and the noisy nature of financial time-series,
+the project emphasizes evaluation rigor and diagnostic analysis rather
+than maximizing predictive performance.
+
 
 ## 🤖 Modeling & Evaluation
 * **Target variable:** Adjusted Close price (`Adj Close`)
@@ -45,6 +61,7 @@ Predict short-horizon stock price movements using historical market data while e
     * **Ridge/Lasso:** α values
   * The best estimator is saved as `*_Tuned` (e.g., `Random_Forest_Tuned`) for downstream comparison.
 
+
 ## 📈 Results Summary
 
 | Model | Val RMSE | Val MAE | Val R² |
@@ -65,6 +82,7 @@ generalization.
 This highlights the challenges of applying high-capacity models to
 noisy financial time-series and reinforces the importance of
 regularization and validation discipline.
+
 
 ## 🔒 Data Integrity
 To reflect real trading conditions:
