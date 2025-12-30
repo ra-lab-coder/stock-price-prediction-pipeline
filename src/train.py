@@ -161,3 +161,4 @@ class TrainModel:
         except Exception as e:
             self.logger.error(f"Error in hyperparameter tuning for {model_name}: {e}")
             return None
+        

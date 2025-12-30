@@ -40,9 +40,9 @@ class DataSplit:
             val_df   = df.iloc[int(0.6 * n) : int(0.8 * n)]
             test_df  = df.iloc[int(0.8 * n) : ]
             
-            train_df.to_csv(f"train_{ticker}.csv", index=False)
-            val_df.to_csv(f"val_{ticker}.csv", index=False)
-            test_df.to_csv(f"test_{ticker}.csv", index=False)
+            train_df.to_csv(os.path.join(self.data_dir, f"train_{ticker}.csv"), index=False)
+            val_df.to_csv(os.path.join(self.data_dir,f"val_{ticker}.csv"), index=False)
+            test_df.to_csv(os.path.join(self.data_dir,f"test_{ticker}.csv"), index=False)
             
             return train_df, val_df, test_df
     

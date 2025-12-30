@@ -16,7 +16,7 @@ class StockPredictionML(DataSplit, DataPrep, TrainModel):
     Comprehensive Machine Learning system for stock price prediction
     """
     
-    def __init__(self, data_dir="cleaned_data", output_dir="ml_results"):
+    def __init__(self, data_dir="data", output_dir="ml_results"):
         """
         Initialize the ML system
         
@@ -103,18 +103,22 @@ def run(symbol='AAPL'):
     ml_system.initialize_models()
     ml_system.train_and_evaluate_on_val(X_train, y_train, X_val, y_val)
     
-    # Step 7: Do hyperparameter tuning on the best performed model from step 6
+    # Step 7: Store the model comparison results:
+    result_path = os.path.join(ml_system.output_dir, "model_comparison.csv")
+    utils.save_model_comparison_results(model_results=ml_system.model_results, output_path=result_path)
+    
+    # Step 8: Do hyperparameter tuning on the best performed model from step 6
     # but note we're doing the hyperparameter tuning on the original model of the 
     # best performed model, not the trained best model from step 6
     print("\nStep 7: Hyperparameter tuning for best models...")
     tuned_model = ml_system.perform_hyperparameter_tuning(X_train_scaled, y_train, ml_system.best_model)
     
-    # Step 8: Retrain this tuned_model on train_set:
+    # Step 9: Retrain this tuned_model on train_set:
     tuned_model.fit(X_train_scaled, y_train)
     final_model = tuned_model
     ml_system.models['final_model'] = final_model
     
-    # Step 9: Test the final prediction model
+    # Step 10: Test the final prediction model
     y_test_pred, test_results = test(X_test_scaled, y_test, final_model, ml_system.best_model)
     print(test_results)
     

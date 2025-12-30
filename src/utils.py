@@ -2,38 +2,34 @@ import os
 import pandas as pd
 import numpy as np
 
-def create_model_comparison_report(self):
-        """
-        Create comprehensive model comparison report
-        
-        Returns:
-            pandas.DataFrame: Model comparison results
-        """
-        self.logger.info("Creating model comparison report")
-        
-        comparison_data = []
-        
-        for model_name, results in self.model_results.items():
-            comparison_data.append({
-                'Model': model_name,
-                'Train_R2': results['train_r2'],
-                'Val_R2': results['val_r2'],
-                'Train_RMSE': results['train_rmse'],
-                'Val_RMSE': results['val_rmse'],
-                'Test_RMSE': results['test_rmse'],
-            })
-        
-        comparison_df = pd.DataFrame(comparison_data)
-        comparison_df = comparison_df.sort_values('Val_R2', ascending=False)
-        
-        # Save to CSV
-        output_path = os.path.join(self.output_dir, 'model_comparison.csv')
-        comparison_df.to_csv(output_path, index=False)
-        
-        self.logger.info(f"Model comparison saved to: {output_path}")
-        return comparison_df
-    
 
+def save_model_comparison_results(model_results, output_path):
+    """
+    Save model comparison metrics to a CSV file.
+
+    Args:
+        model_results (dict): Dictionary produced by TrainModel.train_and_evaluate_on_val
+        output_path (str): Path to save the CSV file
+    """
+    records = []
+
+    for model_name, results in model_results.items():
+        records.append({
+            "model": model_name,
+            "train_rmse": results["train_rmse"],
+            "train_mae": results["train_mae"],
+            "train_r2": results["train_r2"],
+            "val_rmse": results["val_rmse"],
+            "val_mae": results["val_mae"],
+            "val_r2": results["val_r2"],
+        })
+
+    df = pd.DataFrame(records)
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    df.to_csv(output_path, index=False)
+
+    
 def save_predictions(y_test_pred, y_test, csv_path, index, index_name="Date"):
     df_results = pd.DataFrame({
         "Actual_Price": y_test,
